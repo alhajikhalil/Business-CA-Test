@@ -73,3 +73,26 @@ class BusinessDirectory:
                 self._undo_stack.append(removed)   # push onto stack
                 return True
         return False
+    
+    def undo_delete(self):
+        """Pop the last deleted business from the stack and restore it."""
+        if self._undo_stack:
+            business = self._undo_stack.pop()   # LIFO pop
+            self._businesses.append(business)
+            return business
+        return None
+
+    def can_undo(self):
+        return len(self._undo_stack) > 0
+
+    def count(self):
+        return len(self._businesses)
+
+    def get_categories(self):
+        """Return a sorted list of unique categories."""
+        return sorted(set(b.category for b in self._businesses))
+
+    def filter_by_category(self, category):
+        """Return businesses filtered by category, most recent first."""
+        filtered = [b for b in self._businesses if b.category == category]
+        return list(reversed(filtered))
