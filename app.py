@@ -20,3 +20,27 @@ sample_businesses = [
 
 for biz in sample_businesses:
     directory.add_business(biz)
+
+@app.route("/")
+def home():
+    """Home page showing all businesses and recently added."""
+    category_filter = request.args.get("category", "")
+    if category_filter:
+        businesses = directory.filter_by_category(category_filter)
+    else:
+        businesses = directory.get_all()
+
+    recently_added = directory.get_recently_added(3)
+    categories = directory.get_categories()
+    can_undo = directory.can_undo()
+
+    return render_template(
+        "index.html",
+        businesses=[b.to_dict() for b in businesses],
+        recently_added=[b.to_dict() for b in recently_added],
+        categories=categories,
+        selected_category=category_filter,
+        total_count=directory.count(),
+        can_undo=can_undo,
+        now=datetime.now().strftime("%B %d, %Y"),
+    )
