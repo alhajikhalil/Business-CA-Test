@@ -34,3 +34,105 @@
       justify-content: space-between;
       border-bottom: 4px solid var(--accent);
     }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: -1px;
+      padding: 1rem 0;
+    }
+
+    .logo span { color: var(--accent); }
+
+    nav a {
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-left: 2rem;
+      opacity: 0.8;
+    }
+    nav a:hover { opacity: 1; }
+
+    .page-hero {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 2.5rem 2rem;
+    }
+
+    .page-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+    }
+
+    .page-hero p {
+      font-size: 0.9rem;
+      opacity: 0.6;
+      margin-top: 0.4rem;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 2.5rem auto;
+      padding: 0 2rem;
+    }
+
+    .flash-zone { margin-bottom: 1.5rem; }
+
+    .flash {
+      padding: 0.8rem 1.2rem;
+      border-left: 4px solid;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      border-radius: 2px;
+    }
+
+    .flash.error { background: #fdf0ec; border-color: var(--accent); color: var(--accent); }
+
+    .form-card {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.4rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    label .required { color: var(--accent); margin-left: 2px; }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 2px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--ink);
+      background: var(--cream);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--accent);
+      background: white;
+    }
+
+    textarea { resize: vertical; min-height: 100px; }
