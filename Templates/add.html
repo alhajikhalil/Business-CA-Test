@@ -186,3 +186,82 @@
       border-top: 1px solid var(--border);
       margin-top: 3rem;
     }
+
+ </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Biz<span>Spot</span></div>
+  <nav>
+    <a href="/">← Back to Directory</a>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <h1>Add a Business</h1>
+  <p>List a local business or startup in the community directory.</p>
+</div>
+
+<div class="container">
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-zone">
+        {% for category, message in messages %}
+          <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <div class="form-card">
+    <form action="/add" method="POST">
+
+      <div class="form-group">
+        <label>Business Name <span class="required">*</span></label>
+        <input type="text" name="name" placeholder="e.g. Mama Titi's Kitchen" value="{{ form_data.get('name', '') }}" required />
+      </div>
+
+      <div class="form-group">
+        <label>Category <span class="required">*</span></label>
+        <select name="category" required>
+          <option value="" disabled {% if not form_data.get('category') %}selected{% endif %}>Select a category…</option>
+          {% set cats = ['Food & Beverage', 'Education & Tech', 'Agriculture', 'Transport & Delivery', 'Services', 'Health & Wellness', 'Fashion & Retail', 'Finance & Fintech', 'Manufacturing', 'Creative & Media', 'Other'] %}
+          {% for cat in cats %}
+            <option value="{{ cat }}" {% if form_data.get('category') == cat %}selected{% endif %}>{{ cat }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Description <span class="required">*</span></label>
+        <textarea name="description" placeholder="What does this business do? What makes it special?">{{ form_data.get('description', '') }}</textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Location <span class="required">*</span></label>
+          <input type="text" name="location" placeholder="e.g. Bodija, Ibadan" value="{{ form_data.get('location', '') }}" required />
+        </div>
+
+        <div class="form-group">
+          <label>Contact <span class="required">*</span></label>
+          <input type="text" name="contact" placeholder="Phone or email" value="{{ form_data.get('contact', '') }}" required />
+        </div>
+      </div>
+
+      <div class="submit-row">
+        <button type="submit" class="btn-submit">Submit Business</button>
+        <a href="/" class="btn-cancel">Cancel</a>
+      </div>
+
+    </form>
+  </div>
+
+</div>
+
+<footer>BizSpot · CSC 202 CA Project · Built with Flask &amp; Python</footer>
+
+</body>
+</html>
