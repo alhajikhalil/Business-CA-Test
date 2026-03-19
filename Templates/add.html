@@ -136,7 +136,7 @@
     }
 
     textarea { resize: vertical; min-height: 100px; }
-    
+
  .form-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -144,3 +144,36 @@
     }
 
     @media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
+
+     .submit-row {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin-top: 2rem;
+    }
+
+    .btn-submit {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.85rem 2rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-submit:hover { background: #b8441f; }
+
+    .btn-cancel {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .btn-cancel:hover { color: var(--ink); }
