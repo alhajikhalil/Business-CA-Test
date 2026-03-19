@@ -44,3 +44,51 @@ def home():
         can_undo=can_undo,
         now=datetime.now().strftime("%B %d, %Y"),
     )
+
+
+@app.route("/add", methods=["GET", "POST"])
+def add_business():
+    """Page to add a new business."""
+    if request.method == "POST":
+        name = request.form.get("name", "").strip()
+        category = request.form.get("category", "").strip()
+        description = request.form.get("description", "").strip()
+        location = request.form.get("location", "").strip()
+        contact = request.form.get("contact", "").strip()
+
+        if not all([name, category, description, location, contact]):
+            flash("All fields are required.", "error")
+            return render_template("add.html", form_data=request.form)
+
+        new_biz = Business(name, category, description, location, contact)
+        directory.add_business(new_biz)
+        flash(f'"{name}" has been added to the directory!', "success")
+        return redirect(url_for("home"))
+
+    return render_template("add.html", form_data={})
+
+
+@app.route("/delete/<int:business_id>", methods=["POST"])
+def delete_business(business_id):
+    """Delete a business by ID (pushes to undo stack)."""
+    success = directory.delete_business(business_id)
+    if success:
+        flash("Business removed. You can undo this action.", "info")
+    else:
+        flash("Business not found.", "error")
+    return redirect(url_for("home"))
+
+
+@app.route("/undo", methods=["POST"])
+def undo_delete():
+    """Undo the last delete."""
+    restored = directory.undo_delete()
+    if restored:
+        flash(f'"{restored.name}" has been restored!', "success")
+    else:
+        flash("Nothing to undo.", "error")
+    return redirect(url_for("home"))
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
