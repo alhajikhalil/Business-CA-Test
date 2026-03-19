@@ -6,3 +6,31 @@
   <title>Add Business — BizSpot</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
+:root {
+      --ink: #0f0e0c;
+      --cream: #faf7f2;
+      --accent: #d4522a;
+      --accent2: #2a7d4f;
+      --gold: #c9a84c;
+      --muted: #7a7570;
+      --border: #e8e2d9;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+    }
+
+    header {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 4px solid var(--accent);
+    }
