@@ -45,3 +45,31 @@ class Business:
             "timestamp": self.timestamp.strftime("%B %d, %Y at %I:%M %p"),
             "time_since": self.time_since_added(),
         }
+
+class BusinessDirectory:
+    """Manages a collection of businesses using a Stack for undo and a list for all businesses."""
+
+    def __init__(self):
+        self._businesses = []       # main list of all businesses
+        self._undo_stack = []       # LIFO stack for undo-delete
+
+    def add_business(self, business: Business):
+        """Add a new business to the directory."""
+        self._businesses.append(business)
+
+    def get_all(self):
+        """Return all businesses, most recent first."""
+        return list(reversed(self._businesses))
+
+    def get_recently_added(self, n=3):
+        """Return the N most recently added businesses."""
+        return list(reversed(self._businesses))[:n]
+
+    def delete_business(self, business_id: int):
+        """Remove a business by ID and push to undo stack."""
+        for i, biz in enumerate(self._businesses):
+            if biz.id == business_id:
+                removed = self._businesses.pop(i)
+                self._undo_stack.append(removed)   # push onto stack
+                return True
+        return False
